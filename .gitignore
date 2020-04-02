@@ -1,0 +1,4 @@
+.vs/
+conf/etc/php7/php-fpm.d/
+build-container.sh
+build-image.sh
