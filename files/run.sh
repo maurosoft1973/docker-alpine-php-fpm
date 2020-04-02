@@ -31,7 +31,7 @@ PHP_POOL_USER=/etc/php7/php-fpm.d/$WWW_USER.conf
 echo "Create configuration php for user $WWW_USER"
 echo "[$WWW_USER]" >> $PHP_POOL_USER
 echo "user = $WWW_USER"  >> $PHP_POOL_USER
-echo "group = www-data"  >> $PHP_POOL_USER
+echo "group = $WWW_GROUP"  >> $PHP_POOL_USER
 echo "listen = $IP:$PORT" >> $PHP_POOL_USER
 echo "pm = dynamic" >> $PHP_POOL_USER
 echo "pm.max_children = 5" >> $PHP_POOL_USER
