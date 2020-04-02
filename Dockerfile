@@ -1,5 +1,21 @@
 FROM maurosoft1973/alpine:3.11.5-amd64
 
+ARG BUILD_DATE
+
+LABEL maintainer="Mauro Cardillo <mauro.cardillo@gmail.com>" \
+    architecture="amd64/x86_64" \
+    php-version="7.3.16" \
+    alpine-version="3.11.5" \
+    build="02-Apr-2020" \
+    org.opencontainers.image.title="alpine-mariadb" \
+    org.opencontainers.image.description="PHP-FPM 7.0 Docker image running on Alpine Linux" \
+    org.opencontainers.image.authors="Mauro Cardillo <mauro.cardillo@gmail.com>" \
+    org.opencontainers.image.vendor="Mauro Cardillo" \
+    org.opencontainers.image.version="v7.3.16" \
+    org.opencontainers.image.url="https://hub.docker.com/r/maurosoft1973/alpine-php-fpm/" \
+    org.opencontainers.image.source="https://github.com/maurosoft1973/alpine-php-fpm" \
+    org.opencontainers.image.created=$BUILD_DATE
+
 RUN \
 	deluser xfs && \
 	adduser -s /bin/false -H -u 33 -D www-data && \
@@ -35,5 +51,3 @@ RUN chmod -R 755 /scripts
 VOLUME ["/var/www"]
 
 ENTRYPOINT ["/scripts/run.sh"]
-
-#CMD ["/usr/sbin/php-fpm7","--nodaemonize"]
