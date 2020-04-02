@@ -17,8 +17,8 @@ amd64 build:
   - master
   script:
   - BUILD_DATE=$(date +"%Y-%m-%d")
-  - docker build --build-arg BUILD_DATE=$BUILD_DATE -t maurosoft1973/alpine-fpm -t maurosoft1973/alpine-fpm:amd64 -t maurosoft1973/alpine-fpm:x86_64 .
+  - docker build --build-arg BUILD_DATE=$BUILD_DATE -t maurosoft1973/alpine-php-fpm -t maurosoft1973/alpine-php-fpm:amd64 -t maurosoft1973/alpine-php-fpm:x86_64 .
   - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USER" --password-stdin
-  - docker push maurosoft1973/alpine-fpm:amd64
-  - docker push maurosoft1973/alpine-fpm:x86_64
-  - docker push maurosoft1973/alpine-fpm
+  - docker push maurosoft1973/alpine-php-fpm:amd64
+  - docker push maurosoft1973/alpine-php-fpm:x86_64
+  - docker push maurosoft1973/alpine-php-fpm
