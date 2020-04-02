@@ -2,6 +2,8 @@
 
 WWW_USER=${WWW_USER:-"www"}
 WWW_USER_UID=${WWW_USER_UID:-"5001"}
+WWW_GROUP=${WWW_USER:-"www-data"}
+WWW_GROUP_UID=${WWW_USER_UID:-"33"}
 IP=${IP:-"0.0.0.0"}
 PORT=${PORT:-"7000"}
 LOCALTIME=${LOCALTIME:-"Europe/Brussels"}
@@ -13,6 +15,15 @@ if [ $CHECK == "0" ]; then
     adduser -s /bin/false -H -u ${WWW_USER_UID} -D ${WWW_USER}
 else
     echo -e "Skipping,user $WWW_USER exist"
+fi
+
+#Create User (if not exist)
+CHECK=$(cat /etc/passwd | grep $WWW_GROUP | wc -l)
+if [ $CHECK == "0" ]; then
+    echo "Create User $WWW_GROUP with uid $WWW_GROUP_UID"
+    adduser -s /bin/false -H -u ${WWW_GROUP_UID} -D ${WWW_GROUP}
+else
+    echo -e "Skipping,user $WWW_GROUP exist"
 fi
 
 PHP_POOL_USER=/etc/php7/php-fpm.d/$WWW_USER.conf
