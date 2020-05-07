@@ -46,7 +46,7 @@ RUN \
 	git clone https://gitlab.com/rilian-la-te/musl-locales && \
 	cd musl-locales && cmake -DLOCALE_PROFILE=OFF -DCMAKE_INSTALL_PREFIX:PATH=/usr . && make && make install && \
 	cd .. && rm -r musl-locales && \
-	apk del .locale_build
+	apk del .locale_build && \
 	rm -rf /tmp/* /var/cache/apk/* && \
 	rm /etc/php7/php-fpm.d/www.conf
 
