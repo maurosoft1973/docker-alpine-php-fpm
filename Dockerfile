@@ -3,7 +3,7 @@ FROM maurosoft1973/alpine:3.11.5-amd64
 ARG BUILD_DATE
 
 # set our environment variable
-ENV MUSL_LOCPATH="/usr/share/i18n/locales/musl"
+ENV MUSL_LOCPATH="/usr/local/share/i18n/locales/musl"
 
 LABEL maintainer="Mauro Cardillo <mauro.cardillo@gmail.com>" \
     architecture="amd64/x86_64" \
@@ -42,12 +42,9 @@ RUN \
 	php7-fpm \
 	php7-intl && \
 	apk add php7-xdebug --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ && \
-	apk --no-cache add libintl && \
-	apk --no-cache --virtual .locale_build add cmake make musl-dev gcc gettext-dev git && \
-	git clone https://gitlab.com/rilian-la-te/musl-locales && \
-	cd musl-locales && cmake -DLOCALE_PROFILE=OFF -DCMAKE_INSTALL_PREFIX:PATH=/usr . && make && make install && \
-	cd .. && rm -r musl-locales && \
-	apk del .locale_build && \
+	apk --no-cache add cmake make musl-dev gcc gettext-dev git libintl && \
+	cd /tmp && git clone https://gitlab.com/rilian-la-te/musl-locales.git && \
+	cd /tmp/musl-locales && cmake . && make && make install && \
 	rm -rf /tmp/* /var/cache/apk/* && \
 	rm /etc/php7/php-fpm.d/www.conf
 
