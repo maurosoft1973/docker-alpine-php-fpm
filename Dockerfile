@@ -39,7 +39,7 @@ RUN \
 	php7-gd \ 
 	php7-mbstring \
 	php7-session \
-	php7-fpm && \
+	php7-fpm \
 	php7-intl && \
 	apk add php7-xdebug --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ && \
 	apk --no-cache add libintl && \
