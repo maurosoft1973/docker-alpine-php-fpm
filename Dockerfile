@@ -1,4 +1,4 @@
-FROM maurosoft1973/alpine:3.11.5-amd64
+FROM maurosoft1973/alpine:3.11.6-amd64
 
 ARG BUILD_DATE
 
@@ -8,7 +8,7 @@ ENV MUSL_LOCPATH="/usr/local/share/i18n/locales/musl"
 LABEL maintainer="Mauro Cardillo <mauro.cardillo@gmail.com>" \
     architecture="amd64/x86_64" \
     php-version="7.3.16" \
-    alpine-version="3.11.5" \
+    alpine-version="3.11.6" \
     build="07-May-2020" \
     org.opencontainers.image.title="alpine-php-fpm" \
     org.opencontainers.image.description="PHP-FPM 7.0 Docker image running on Alpine Linux" \
