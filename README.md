@@ -1,4 +1,4 @@
-# Alpine PHP-FPM
+# PHP-FPM Docker image running on Alpine Linux
 
 [![Docker Automated build](https://img.shields.io/docker/automated/maurosoft1973/alpine-php-fpm.svg?style=for-the-badge&logo=docker)](https://hub.docker.com/r/maurosoft1973/alpine-php-fpm/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/maurosoft1973/alpine-php-fpm.svg?style=for-the-badge&logo=docker)](https://hub.docker.com/r/maurosoft1973/alpine-php-fpm/)
