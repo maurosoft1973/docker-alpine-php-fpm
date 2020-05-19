@@ -1,15 +1,17 @@
 #!/bin/sh
 
+IP=${IP:-"0.0.0.0"}
+PORT=${PORT:-"7000"}
 WWW_USER=${WWW_USER:-"www"}
 WWW_USER_UID=${WWW_USER_UID:-"5001"}
 WWW_GROUP=${WWW_GROUP:-"www-data"}
 WWW_GROUP_UID=${WWW_GROUP_UID:-"33"}
-IP=${IP:-"0.0.0.0"}
-PORT=${PORT:-"7000"}
 PHP_POOL_MAX_CHILDREN=${PHP_POOL_MAX_CHILDREN:-"5"}
 PHP_POOL_START_SERVERS=${PHP_POOL_START_SERVERS:-"1"}
 PHP_POOL_MIN_SPARE_SERVERS=${PHP_POOL_MIN_SPARE_SERVERS:-"1"}
 PHP_POOL_MAX_SPARE_SERVERS=${PHP_POOL_MAX_SPARE_SERVERS:-"3"}
+
+source /scripts/init-alpine.sh
 
 #Create User (if not exist)
 CHECK=$(cat /etc/passwd | grep $WWW_USER | wc -l)
