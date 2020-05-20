@@ -31,6 +31,11 @@ else
     echo -e "Skipping,user $WWW_GROUP exist"
 fi
 
+echo "Change Timezone ${TIMEZONE} php.ini file"
+TIMEZONE_PHP=${TIMEZONE//\//\\/}
+sed "s/{timezone}/${TIMEZONE_PHP}/g" /etc/php7/php.ini > /tmp/php.ini
+cp /tmp/php.ini /etc/php7/php.ini
+
 PHP_POOL_USER=/etc/php7/php-fpm.d/$WWW_USER.conf
 
 echo "Create configuration php for user $WWW_USER"
