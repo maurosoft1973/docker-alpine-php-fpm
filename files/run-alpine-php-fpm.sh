@@ -38,6 +38,10 @@ cp /tmp/php.ini /etc/php7/php.ini
 
 PHP_POOL_USER=/etc/php7/php-fpm.d/$WWW_USER.conf
 
+if [ -f "$PHP_POOL_USER" ]; then
+    rm -rf $PHP_POOL_USER
+fi
+
 echo "Create configuration php for user $WWW_USER"
 echo "[$WWW_USER]" >> $PHP_POOL_USER
 echo "user = $WWW_USER"  >> $PHP_POOL_USER
