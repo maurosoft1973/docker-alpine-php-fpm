@@ -5,14 +5,14 @@ ARG BUILD_DATE
 LABEL \
   maintainer="Mauro Cardillo <mauro.cardillo@gmail.com>" \
   architecture="amd64/x86_64" \
-  php-version="7.3.18" \
-  alpine-version="3.11.6" \
-  build="20-May-2020" \
+  php-version="7.3.19" \
+  alpine-version="3.12.0" \
+  build="07-Jul-2020" \
   org.opencontainers.image.title="alpine-php-fpm" \
-  org.opencontainers.image.description="PHP-FPM 7.3.18 Docker image running on Alpine Linux" \
+  org.opencontainers.image.description="PHP-FPM 7.3.19 Docker image running on Alpine Linux" \
   org.opencontainers.image.authors="Mauro Cardillo <mauro.cardillo@gmail.com>" \
   org.opencontainers.image.vendor="Mauro Cardillo" \
-  org.opencontainers.image.version="v7.3.18" \
+  org.opencontainers.image.version="v7.3.19" \
   org.opencontainers.image.url="https://hub.docker.com/r/maurosoft1973/alpine-php-fpm/" \
   org.opencontainers.image.source="https://github.com/maurosoft1973/alpine-php-fpm" \
   org.opencontainers.image.created=$BUILD_DATE

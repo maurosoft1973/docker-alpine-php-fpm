@@ -36,7 +36,7 @@ do
         TIMEZONE="${arg#*=}"
         shift # Remove
         ;;
-		-i=*|--ip=*)
+        -i=*|--ip=*)
         IP="${arg#*=}"
         shift # Remove
         ;;
@@ -63,17 +63,17 @@ do
         -h|--help)
         echo -e "usage "
         echo -e "$0 "
-		echo -e "  -c=|--container=${CONTAINER} -> name of container"
+        echo -e "  -c=|--container=${CONTAINER} -> name of container"
         echo -e "  -l=|--lc_all=${LC_ALL} -> locale"
         echo -e "  -t=|--timezone=${TIMEZONE} -> timezone"
         echo -e "  -i=|--ip -> ${IP} (address ip listen)"
-		echo -e "  -p=|--port -> ${PORT} (port listen)"
+        echo -e "  -p=|--port -> ${PORT} (port listen)"
         echo -e "  -w=|--www -> ${WWW} (www data)"
         echo -e "  -wu=|--www_user -> ${WWW_USER} (www user)"
-		echo -e "  -wui=|--www_user_id -> ${WWW_USER_UID} (www user uid)"
+        echo -e "  -wui=|--www_user_id -> ${WWW_USER_UID} (www user uid)"
         echo -e "  -wg=|--www_group -> ${WWW_GROUP} (www user group)"
-		echo -e "  -wgi=|--www_group_id -> ${WWW_GROUP_UID} (www user group uid)"
-		exit 0
+        echo -e "  -wgi=|--www_group_id -> ${WWW_GROUP_UID} (www user group uid)"
+        exit 0
         ;;
     esac
 done
