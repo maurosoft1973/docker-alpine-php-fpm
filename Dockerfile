@@ -31,15 +31,26 @@ RUN \
   php7-json \
   php7-curl \
   php7-opcache \ 
-  php7-xml \ 
+  php7-xml \
+  php7-zlib \
+  php7-phar \
+  php7-tokenizer \
   php7-zip \ 
   php7-apcu \ 
   php7-gd \ 
+  php7-iconv \
+  php7-imagick \
   php7-mbstring \
+  php7-mcrypt \
+  php7-fileinfo \
   php7-session \
+  php7-openssl \
+  php7-pdo \
+  php7-pdo_mysql \
   php7-fpm \
   php7-dom \
   php7-simplexml \
+  php7-xmlwriter \
   php7-intl && \
   apk add php7-xdebug --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ && \
   rm -rf /tmp/* /var/cache/apk/* && \
