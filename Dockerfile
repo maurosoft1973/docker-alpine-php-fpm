@@ -7,7 +7,7 @@ LABEL \
   architecture="amd64/x86_64" \
   php-version="7.3.19" \
   alpine-version="3.12.0" \
-  build="07-Jul-2020" \
+  build="12-Set-2020" \
   org.opencontainers.image.title="alpine-php-fpm" \
   org.opencontainers.image.description="PHP-FPM 7.3.19 Docker image running on Alpine Linux" \
   org.opencontainers.image.authors="Mauro Cardillo <mauro.cardillo@gmail.com>" \
@@ -25,6 +25,7 @@ RUN \
   apk add --update --no-cache \
   php7-common \
   php7-cli \ 
+  php7-ctype \
   php7-mysqlnd \
   php7-mysqli \
   php7-json \
