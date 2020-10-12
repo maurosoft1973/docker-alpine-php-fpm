@@ -1,6 +1,6 @@
 #!/bin/sh
 
-IP=${IP:-"0.0.0.0"}
+DEBUG=${DEBUG:-"0"}
 PORT=${PORT:-"7000"}
 WWW_USER=${WWW_USER:-"www"}
 WWW_USER_UID=${WWW_USER_UID:-"5001"}
@@ -22,13 +22,13 @@ else
     echo -e "Skipping,user $WWW_USER exist"
 fi
 
-#Create User (if not exist)
-CHECK=$(cat /etc/passwd | grep $WWW_GROUP | wc -l)
+#Create Group (if not exist)
+CHECK=$(cat /etc/group | grep $WWW_GROUP | wc -l)
 if [ ${CHECK} == 0 ]; then
-    echo "Create User $WWW_GROUP with uid $WWW_GROUP_UID"
-    adduser -s /bin/false -H -u ${WWW_GROUP_UID} -D ${WWW_GROUP}
+    echo "Create Group $WWW_GROUP with uid $WWW_GROUP_UID"
+    addgroup -g ${WWW_GROUP_UID} ${WWW_GROUP}
 else
-    echo -e "Skipping,user $WWW_GROUP exist"
+    echo -e "Skipping,group $WWW_GROUP exist"
 fi
 
 echo "Change Timezone ${TIMEZONE} php.ini file"
@@ -59,8 +59,12 @@ echo "request_terminate_timeout = 300" >> $PHP_POOL_USER
 
 echo "Listen on $IP:$PORT"
 
-if [ "$WWW_USER" == "root" ]; then
-    /usr/sbin/php-fpm7 --nodaemonize -R
-else 
-    /usr/sbin/php-fpm7 --nodaemonize
+if [ "${DEBUG}" -eq "0" ]; then
+    if [ "$WWW_USER" == "root" ]; then
+        /usr/sbin/php-fpm7 --nodaemonize -R
+    else 
+        /usr/sbin/php-fpm7 --nodaemonize
+    fi
+else
+    /bin/sh
 fi

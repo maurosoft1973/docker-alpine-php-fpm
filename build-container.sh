@@ -8,6 +8,7 @@ IMAGE=maurosoft1973/alpine-php-fpm:test
 CONTAINER=alpine-php-fpm
 LC_ALL=it_IT.UTF-8
 TIMEZONE=Europe/Rome
+DEBUG=0
 IP=0.0.0.0
 PORT=7000
 WWW=/var/www
@@ -24,6 +25,10 @@ PHP_POOL_MAX_SPARE_SERVERS=3
 for arg in "$@"
 do
     case $arg in
+        -d=*|--debug=*)
+        DEBUG="${arg#*=}"
+        shift # Remove
+        ;;
         -c=*|--container=*)
         CONTAINER="${arg#*=}"
         shift # Remove
@@ -63,6 +68,7 @@ do
         -h|--help)
         echo -e "usage "
         echo -e "$0 "
+        echo -e "  -d=|--debug=${DEBUG} -> debug mode"
         echo -e "  -c=|--container=${CONTAINER} -> name of container"
         echo -e "  -l=|--lc_all=${LC_ALL} -> locale"
         echo -e "  -t=|--timezone=${TIMEZONE} -> timezone"
@@ -80,6 +86,7 @@ done
 
 echo "# Image               : ${IMAGE}"
 echo "# Container Name      : ${CONTAINER}"
+echo "# Debug Mode          : ${DEBUG}"
 echo "# Locale              : ${LC_ALL}"
 echo "# Timezone            : ${TIMEZONE}"
 echo "# IP Listen           : $IP"
@@ -91,8 +98,8 @@ echo "# WWW Group           : $WWW_GROUP"
 echo "# WWW Group UID       : $WWW_GROUP_UID"
 
 echo -e "Check if container ${CONTAINER} exist"
-CHECK=$(docker container ps -a | grep ${CONTAINER} | wc -l)
-if [ ${CHECK} == 1 ]; then
+CHECK=$(docker container ps -a -f "name=${CONTAINER}" | wc -l)
+if [ ${CHECK} == 2 ]; then
     echo -e "Stop Container -> ${CONTAINER}"
     docker stop ${CONTAINER} > /dev/null
 
@@ -103,7 +110,7 @@ else
 fi
 
 echo -e "Create and run container"
-docker run -dit --name ${CONTAINER} -p ${IP}:${PORT}:${PORT} -v ${WWW}:/var/www -e LC_ALL=${LC_ALL} -e TIMEZONE=${TIMEZONE} -e WWW_USER=${WWW_USER} -e WWW_USER_UID=${WWW_USER_UID} -e WWW_GROUP=${WWW_GROUP} -e WWW_GROUP_UID=${WWW_GROUP_UID} -e IP=${IP} -e PORT=${PORT} ${IMAGE}
+docker run -dit --name ${CONTAINER} -p ${IP}:${PORT}:${PORT} -v ${WWW}:/var/www -e LC_ALL=${LC_ALL} -e TIMEZONE=${TIMEZONE} -e DEBUG=${DEBUG} -e WWW_USER=${WWW_USER} -e WWW_USER_UID=${WWW_USER_UID} -e WWW_GROUP=${WWW_GROUP} -e WWW_GROUP_UID=${WWW_GROUP_UID} -e IP=${IP} -e PORT=${PORT} ${IMAGE}
 
 echo -e "Sleep 5 second"
 sleep 5
@@ -122,6 +129,14 @@ docker exec -it ${CONTAINER} date
 echo -e ""
 echo -e "Check FCGI Connection"
 SCRIPT_NAME=/status SCRIPT_FILENAME=/status REQUEST_METHOD=GET cgi-fcgi -bind -connect ${IP}:${PORT}
+
+echo -e ""
+echo -e "PHP Version"
+docker exec -it ${CONTAINER} php -v
+
+echo -e ""
+echo -e "PHP Info"
+docker exec -it ${CONTAINER} php -i
 
 echo -e ""
 echo -e "Container Logs"

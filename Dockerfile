@@ -5,14 +5,14 @@ ARG BUILD_DATE
 LABEL \
     maintainer="Mauro Cardillo <mauro.cardillo@gmail.com>" \
     architecture="amd64/x86_64" \
-    php-version="7.3.19" \
+    php-version="7.4.11" \
     alpine-version="3.12.0" \
     build="$BUILD_DATE" \
     org.opencontainers.image.title="alpine-php-fpm" \
-    org.opencontainers.image.description="PHP-FPM 7.3.19 Docker image running on Alpine Linux" \
+    org.opencontainers.image.description="PHP-FPM 7.4.11 Docker image running on Alpine Linux" \
     org.opencontainers.image.authors="Mauro Cardillo <mauro.cardillo@gmail.com>" \
     org.opencontainers.image.vendor="Mauro Cardillo" \
-    org.opencontainers.image.version="v7.3.19" \
+    org.opencontainers.image.version="v7.4.11" \
     org.opencontainers.image.url="https://hub.docker.com/r/maurosoft1973/alpine-php-fpm/" \
     org.opencontainers.image.source="https://github.com/maurosoft1973/alpine-php-fpm" \
     org.opencontainers.image.created=$BUILD_DATE
@@ -22,7 +22,11 @@ RUN \
     adduser -s /bin/false -H -u 33 -D www-data && \
     mkdir -p /var/run/php && \	
     mkdir -p /var/www && \	
-    apk add --update --no-cache \
+    apk add --update --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community \
+    autoconf \
+    build-base \
+    php7-pear \
+    php7-dev \
     php7-common \
     php7-cli \ 
     php7-ctype \
@@ -52,7 +56,11 @@ RUN \
     php7-simplexml \
     php7-xmlwriter \
     php7-intl && \
-    apk add php7-xdebug --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ && \
+    pecl install xdebug && \
+    apk del \
+    php-pear \
+    build-base \
+    autoconf && \
     rm -rf /tmp/* /var/cache/apk/* && \
     rm /etc/php7/php-fpm.d/www.conf
 

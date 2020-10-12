@@ -31,14 +31,14 @@ amd64 build latest:
   - docker push maurosoft1973/alpine-php-fpm:x86_64
   - docker push maurosoft1973/alpine-php-fpm
 
-amd64 build 7.3.19:
+amd64 build 7.4.11:
   stage: Build e Push image
   only:
   - master
   script:
   - BUILD_DATE=$(date +"%Y-%m-%d")
-  - docker build --build-arg BUILD_DATE=$BUILD_DATE -t maurosoft1973/alpine-php-fpm:7.3.19 -t maurosoft1973/alpine-php-fpm:7.3.19-amd64 -t maurosoft1973/alpine-php-fpm:7.3.19-x86_64 .
+  - docker build --build-arg BUILD_DATE=$BUILD_DATE -t maurosoft1973/alpine-php-fpm:7.4.11 -t maurosoft1973/alpine-php-fpm:7.4.11-amd64 -t maurosoft1973/alpine-php-fpm:7.4.11-x86_64 .
   - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USER" --password-stdin
-  - docker push maurosoft1973/alpine-php-fpm:7.3.19-amd64
-  - docker push maurosoft1973/alpine-php-fpm:7.3.19-x86_64
-  - docker push maurosoft1973/alpine-php-fpm:7.3.19
+  - docker push maurosoft1973/alpine-php-fpm:7.4.11-amd64
+  - docker push maurosoft1973/alpine-php-fpm:7.4.11-x86_64
+  - docker push maurosoft1973/alpine-php-fpm:7.4.11
