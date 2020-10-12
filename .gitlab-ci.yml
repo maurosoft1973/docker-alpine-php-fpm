@@ -19,7 +19,7 @@ update readme:
   - docker pull maurosoft1973/alpine-readme-to-dockerhub:latest
   - docker run --rm -e DOCKERHUB_USERNAME="$DOCKERHUB_USERNAME" -e DOCKERHUB_PASSWORD="$DOCKERHUB_PASSWORD" -e DOCKERHUB_REPO_PREFIX="$DOCKERHUB_REPO_PREFIX" -e DOCKERHUB_REPO_NAME="$DOCKERHUB_REPO_NAME" -e SHORT_DESCRIPTION="$DOCKERHUB_SHORT_DESCRIPTION" -e FULL_DESCRIPTION="$FULL_DESCRIPTION" maurosoft1973/alpine-readme-to-dockerhub
 
-amd64 build:
+amd64 build latest:
   stage: Build e Push image
   only:
   - master
@@ -30,3 +30,15 @@ amd64 build:
   - docker push maurosoft1973/alpine-php-fpm:amd64
   - docker push maurosoft1973/alpine-php-fpm:x86_64
   - docker push maurosoft1973/alpine-php-fpm
+
+amd64 build 7.3.19:
+  stage: Build e Push image
+  only:
+  - master
+  script:
+  - BUILD_DATE=$(date +"%Y-%m-%d")
+  - docker build --build-arg BUILD_DATE=$BUILD_DATE -t maurosoft1973/alpine-php-fpm:7.3.19 -t maurosoft1973/alpine-php-fpm:7.3.19-amd64 -t maurosoft1973/alpine-php-fpm:7.3.19-x86_64 .
+  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USER" --password-stdin
+  - docker push maurosoft1973/alpine-php-fpm:7.3.19-amd64
+  - docker push maurosoft1973/alpine-php-fpm:7.3.19-x86_64
+  - docker push maurosoft1973/alpine-php-fpm:7.3.19
