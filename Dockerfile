@@ -47,6 +47,9 @@ RUN \
     php7-mbstring \
     php7-mcrypt \
     php7-fileinfo \
+    php7-posix \
+    php7-imap \
+    php7-ssh2 \
     php7-session \
     php7-openssl \
     php7-pdo \
