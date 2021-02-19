@@ -10,6 +10,7 @@ PHP_POOL_MAX_CHILDREN=${PHP_POOL_MAX_CHILDREN:-"5"}
 PHP_POOL_START_SERVERS=${PHP_POOL_START_SERVERS:-"1"}
 PHP_POOL_MIN_SPARE_SERVERS=${PHP_POOL_MIN_SPARE_SERVERS:-"1"}
 PHP_POOL_MAX_SPARE_SERVERS=${PHP_POOL_MAX_SPARE_SERVERS:-"3"}
+PHP_ENABLED_XDEBUG=${PHP_ENABLED_XDEBUG:-"1"}
 
 source /scripts/init-alpine.sh
 
@@ -35,6 +36,18 @@ echo "Change Timezone ${TIMEZONE} php.ini file"
 TIMEZONE_PHP=${TIMEZONE//\//\\/}
 sed "s/{timezone}/${TIMEZONE_PHP}/g" /etc/php7/php.ini > /tmp/php.ini
 cp /tmp/php.ini /etc/php7/php.ini
+
+if [ "$PHP_ENABLED_XDEBUG" == "0" ]; then
+    sed -i 's/zend_extension=\/usr\/lib\/php7\/modules\/xdebug.so//' /etc/php7/php.ini
+    sed -i 's/xdebug.coverage_enable = 0 //' /etc/php7/php.ini
+    sed -i 's/;xdebug.remote_handler = dbgp//' /etc/php7/php.ini
+    sed -i 's/;xdebug.remote_host = 192.168.1.147//' /etc/php7/php.ini
+    sed -i 's/xdebug.remote_port = 9000//' /etc/php7/php.ini
+    sed -i 's/xdebug.remote_enable = 1//' /etc/php7/php.ini
+    sed -i 's/xdebug.remote_connect_back = 1//' /etc/php7/php.ini
+    sed -i 's/xdebug.remote_log = \/tmp\/xdebug.log//' /etc/php7/php.ini
+    sed -i 's/xdebug.remote_autostart = true//' /etc/php7/php.ini
+fi
 
 PHP_POOL_USER=/etc/php7/php-fpm.d/$WWW_USER.conf
 
