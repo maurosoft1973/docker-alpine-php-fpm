@@ -9,12 +9,12 @@ echo "# Image               : ${IMAGE}"
 echo "# Build Date          : ${BUILD_DATE}"
 
 echo "Remove image ${IMAGE}:test"
-docker rmi -f ${IMAGE}:test-${BUILD_DATE} > /dev/null 2>&1
+docker rmi -f ${IMAGE}:test > /dev/null 2>&1
 
 echo "Build Image: ${IMAGE}:test"
-docker build --build-arg BUILD_DATE=$BUILD_DATE -t ${IMAGE}:test-${BUILD_DATE} .
+docker build --build-arg BUILD_DATE=$BUILD_DATE -t ${IMAGE}:test .
 
 #echo "Login Docker HUB"
 echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USER" --password-stdin
 
-docker push ${IMAGE}:test-${BUILD_DATE}
+docker push ${IMAGE}:test

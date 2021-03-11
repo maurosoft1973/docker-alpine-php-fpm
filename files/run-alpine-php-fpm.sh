@@ -10,7 +10,12 @@ PHP_POOL_MAX_CHILDREN=${PHP_POOL_MAX_CHILDREN:-"5"}
 PHP_POOL_START_SERVERS=${PHP_POOL_START_SERVERS:-"1"}
 PHP_POOL_MIN_SPARE_SERVERS=${PHP_POOL_MIN_SPARE_SERVERS:-"1"}
 PHP_POOL_MAX_SPARE_SERVERS=${PHP_POOL_MAX_SPARE_SERVERS:-"3"}
-PHP_ENABLED_XDEBUG=${PHP_ENABLED_XDEBUG:-"1"}
+PHP_XDEBUG_ENABLED=${PHP_XDEBUG_ENABLED:-"1"}
+PHP_XDEBUG_CLIENT_PORT=${PHP_XDEBUG_CLIENT_PORT:-"9000"}
+PHP_XDEBUG_DISCOVER_CLIENT_HOST=${PHP_XDEBUG_DISCOVER_CLIENT_HOST:-"1"}
+PHP_XDEBUG_START_WITH_REQUEST=${PHP_XDEBUG_START_WITH_REQUEST:-"yes"}
+PHP_XDEBUG_LOG=${PHP_XDEBUG_LOG:-"/tmp/xdebug.log"}
+PHP_XDEBUG_MODE=${PHP_XDEBUG_MODE:-"debug,develop"}
 
 source /scripts/init-alpine.sh
 
@@ -32,6 +37,14 @@ else
     echo -e "Skipping,group $WWW_GROUP exist"
 fi
 
+if [ -f "/etc/php7/conf.d/100-custom.ini" ]; then
+    rm -rf /etc/php7/conf.d/100-custom.ini
+fi
+
+if [ -f "/etc/php7/conf.d/99-xdebug.ini" ]; then
+    rm -rf /etc/php7/conf.d/99-xdebug.ini
+fi
+
 echo "Change Timezone ${TIMEZONE} php.ini file"
 echo "date.timezone = '${TIMEZONE}'" >> /etc/php7/conf.d/100-custom.ini
 
@@ -39,13 +52,13 @@ echo "date.timezone = '${TIMEZONE}'" >> /etc/php7/conf.d/100-custom.ini
 #sed "s/{timezone}/${TIMEZONE_PHP}/g" /etc/php7/php.ini > /tmp/php.ini
 #cp /tmp/php.ini /etc/php7/php.ini
 
-if [ "$PHP_ENABLED_XDEBUG" == "1" ]; then
+if [ "$PHP_XDEBUG_ENABLED" == "1" ]; then
     echo "zend_extension=/usr/lib/php7/modules/xdebug.so" >> /etc/php7/conf.d/99-xdebug.ini
-    echo "xdebug.client_port = 9000" >> /etc/php7/conf.d/99-xdebug.ini
-    echo "xdebug.discover_client_host = 1" >> /etc/php7/conf.d/99-xdebug.ini
-    echo "xdebug.start_with_request  = yes" >> /etc/php7/conf.d/99-xdebug.ini
-    echo "xdebug.log = /tmp/xdebug.log" >> /etc/php7/conf.d/99-xdebug.ini
-    echo "xdebug.mode = debug,develop,trace,coverage,profile" >> /etc/php7/conf.d/99-xdebug.ini
+    echo "xdebug.client_port = ${PHP_XDEBUG_CLIENT_PORT}" >> /etc/php7/conf.d/99-xdebug.ini
+    echo "xdebug.discover_client_host = ${PHP_XDEBUG_DISCOVER_CLIENT_HOST}" >> /etc/php7/conf.d/99-xdebug.ini
+    echo "xdebug.start_with_request  = ${PHP_XDEBUG_START_WITH_REQUEST}" >> /etc/php7/conf.d/99-xdebug.ini
+    echo "xdebug.log = ${PHP_XDEBUG_LOG}" >> /etc/php7/conf.d/99-xdebug.ini
+    echo "xdebug.mode = ${PHP_XDEBUG_MODE}" >> /etc/php7/conf.d/99-xdebug.ini
 fi
 
 PHP_POOL_USER=/etc/php7/php-fpm.d/$WWW_USER.conf
