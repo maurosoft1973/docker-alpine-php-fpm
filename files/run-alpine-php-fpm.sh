@@ -33,20 +33,19 @@ else
 fi
 
 echo "Change Timezone ${TIMEZONE} php.ini file"
-TIMEZONE_PHP=${TIMEZONE//\//\\/}
-sed "s/{timezone}/${TIMEZONE_PHP}/g" /etc/php7/php.ini > /tmp/php.ini
-cp /tmp/php.ini /etc/php7/php.ini
+echo "date.timezone = '${TIMEZONE}'" >> /etc/php7/conf.d/100-custom.ini
 
-if [ "$PHP_ENABLED_XDEBUG" == "0" ]; then
-    sed -i 's/zend_extension=\/usr\/lib\/php7\/modules\/xdebug.so//' /etc/php7/php.ini
-    sed -i 's/xdebug.coverage_enable = 0 //' /etc/php7/php.ini
-    sed -i 's/;xdebug.remote_handler = dbgp//' /etc/php7/php.ini
-    sed -i 's/;xdebug.remote_host = 192.168.1.147//' /etc/php7/php.ini
-    sed -i 's/xdebug.remote_port = 9000//' /etc/php7/php.ini
-    sed -i 's/xdebug.remote_enable = 1//' /etc/php7/php.ini
-    sed -i 's/xdebug.remote_connect_back = 1//' /etc/php7/php.ini
-    sed -i 's/xdebug.remote_log = \/tmp\/xdebug.log//' /etc/php7/php.ini
-    sed -i 's/xdebug.remote_autostart = true//' /etc/php7/php.ini
+#TIMEZONE_PHP=${TIMEZONE//\//\\/}
+#sed "s/{timezone}/${TIMEZONE_PHP}/g" /etc/php7/php.ini > /tmp/php.ini
+#cp /tmp/php.ini /etc/php7/php.ini
+
+if [ "$PHP_ENABLED_XDEBUG" == "1" ]; then
+    echo "zend_extension=/usr/lib/php7/modules/xdebug.so" >> /etc/php7/conf.d/99-xdebug.ini
+    echo "xdebug.client_port = 9000" >> /etc/php7/conf.d/99-xdebug.ini
+    echo "xdebug.discover_client_host = 1" >> /etc/php7/conf.d/99-xdebug.ini
+    echo "xdebug.start_with_request  = yes" >> /etc/php7/conf.d/99-xdebug.ini
+    echo "xdebug.log = /tmp/xdebug.log" >> /etc/php7/conf.d/99-xdebug.ini
+    echo "xdebug.mode = debug,develop,trace,coverage,profile" >> /etc/php7/conf.d/99-xdebug.ini
 fi
 
 PHP_POOL_USER=/etc/php7/php-fpm.d/$WWW_USER.conf

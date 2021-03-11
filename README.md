@@ -4,4 +4,7 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/maurosoft1973/alpine-php-fpm.svg?style=for-the-badge&logo=docker)](https://hub.docker.com/r/maurosoft1973/alpine-php-fpm/)
 [![Docker Stars](https://img.shields.io/docker/stars/maurosoft1973/alpine-php-fpm.svg?style=for-the-badge&logo=docker)](https://hub.docker.com/r/maurosoft1973/alpine-php-fpm/)
 
-[![Alpine Version](https://img.shields.io/badge/Alpine%20version-v3.12.0-green.svg?style=for-the-badge)](https://alpinelinux.org/)
+This Docker image [(maurosoft1973/alpine-php-fpm)](https://hub.docker.com/r/maurosoft1973/alpine-php-fpm/) is based on the minimal [Alpine Linux](https://alpinelinux.org/) with [Php 7.4.16](https://www.php.net/archive/2021.php#2021-03-04-1/).
+
+##### Alpine Version 3.13.2 (Released Feb 17, 2021)
+##### PHP Version 7.4.16-r0

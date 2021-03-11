@@ -5,14 +5,14 @@ ARG BUILD_DATE
 LABEL \
     maintainer="Mauro Cardillo <mauro.cardillo@gmail.com>" \
     architecture="amd64/x86_64" \
-    php-version="7.4.11" \
+    php-version="7.4.16" \
     alpine-version="3.12.0" \
     build="$BUILD_DATE" \
     org.opencontainers.image.title="alpine-php-fpm" \
-    org.opencontainers.image.description="PHP-FPM 7.4.11 Docker image running on Alpine Linux" \
+    org.opencontainers.image.description="PHP-FPM 7.4.16 Docker image running on Alpine Linux" \
     org.opencontainers.image.authors="Mauro Cardillo <mauro.cardillo@gmail.com>" \
     org.opencontainers.image.vendor="Mauro Cardillo" \
-    org.opencontainers.image.version="v7.4.11" \
+    org.opencontainers.image.version="v7.4.16" \
     org.opencontainers.image.url="https://hub.docker.com/r/maurosoft1973/alpine-php-fpm/" \
     org.opencontainers.image.source="https://github.com/maurosoft1973/alpine-php-fpm" \
     org.opencontainers.image.created=$BUILD_DATE
@@ -66,8 +66,6 @@ RUN \
     autoconf && \
     rm -rf /tmp/* /var/cache/apk/* && \
     rm /etc/php7/php-fpm.d/www.conf
-
-COPY conf/etc/php7/ /etc/php7/
 
 ADD files/run-alpine-php-fpm.sh /scripts/run-alpine-php-fpm.sh
 
