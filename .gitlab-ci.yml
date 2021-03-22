@@ -9,6 +9,8 @@ before_script:
     - echo "Read Environment Variable from .env file"
     - source ./.env
     - export JOB_ALPINE_RELEASE=${CI_ALPINE_RELEASE:-"$ALPINE_RELEASE"}
+    - export
+    - exit 0
 
 update readme:
     stage: Documentation

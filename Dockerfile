@@ -2,8 +2,11 @@ FROM maurosoft1973/alpine
 
 ARG BUILD_DATE
 ARG ALPINE_RELEASE
+ARG ALPINE_RELEASE_REPOSITORY
 ARG ALPINE_VERSION
+ARG ALPINE_VERSION_DATE
 ARG PHP_VERSION
+ARG PHP_VERSION_DATE
 
 LABEL \
     maintainer="Mauro Cardillo <mauro.cardillo@gmail.com>" \
@@ -26,8 +29,8 @@ RUN \
     mkdir -p /var/run/php && \
     mkdir -p /var/www && \
     echo "" > /etc/apk/repositories && \
-    echo "https://dl-cdn.alpinelinux.org/alpine/v$ALPINE_RELEASE/main" >> /etc/apk/repositories && \
-    echo "https://dl-cdn.alpinelinux.org/alpine/v$ALPINE_RELEASE/community" >> /etc/apk/repositories && \
+    echo "https://dl-cdn.alpinelinux.org/alpine/$ALPINE_RELEASE_REPOSITORY/main" >> /etc/apk/repositories && \
+    echo "https://dl-cdn.alpinelinux.org/alpine/$ALPINE_RELEASE_REPOSITORY/community" >> /etc/apk/repositories && \
     apk update && \
     apk add --update --no-cache \
     autoconf \
