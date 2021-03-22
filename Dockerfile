@@ -30,6 +30,8 @@ RUN \
     echo "https://dl-cdn.alpinelinux.org/alpine/v$ALPINE_RELEASE/community" >> /etc/apk/repositories && \
     apk update && \
     apk add --update --no-cache \
+    autoconf \
+    build-base \
     php7-pear \
     php7-dev \
     php7-common \
