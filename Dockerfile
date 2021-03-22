@@ -1,18 +1,21 @@
 FROM maurosoft1973/alpine
 
 ARG BUILD_DATE
+ARG ALPINE_RELEASE
+ARG ALPINE_VERSION
+ARG PHP_VERSION
 
 LABEL \
     maintainer="Mauro Cardillo <mauro.cardillo@gmail.com>" \
     architecture="amd64/x86_64" \
-    php-version="7.4.16" \
-    alpine-version="3.12.0" \
+    php-version="$PHP_VERSION" \
+    alpine-version="$ALPINE_VERSION" \
     build="$BUILD_DATE" \
     org.opencontainers.image.title="alpine-php-fpm" \
     org.opencontainers.image.description="PHP-FPM 7.4.16 Docker image running on Alpine Linux" \
     org.opencontainers.image.authors="Mauro Cardillo <mauro.cardillo@gmail.com>" \
     org.opencontainers.image.vendor="Mauro Cardillo" \
-    org.opencontainers.image.version="v7.4.16" \
+    org.opencontainers.image.version="v$PHP_VERSION" \
     org.opencontainers.image.url="https://hub.docker.com/r/maurosoft1973/alpine-php-fpm/" \
     org.opencontainers.image.source="https://github.com/maurosoft1973/alpine-php-fpm" \
     org.opencontainers.image.created=$BUILD_DATE
@@ -20,9 +23,13 @@ LABEL \
 RUN \
     deluser xfs && \
     adduser -s /bin/false -H -u 33 -D www-data && \
-    mkdir -p /var/run/php && \	
-    mkdir -p /var/www && \	
-    apk add --update --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community \
+    mkdir -p /var/run/php && \
+    mkdir -p /var/www && \
+    echo "" > /etc/apk/repositories && \
+    echo "https://dl-cdn.alpinelinux.org/alpine/v$ALPINE_RELEASE/main" >> /etc/apk/repositories && \
+    echo "https://dl-cdn.alpinelinux.org/alpine/v$ALPINE_RELEASE/community" >> /etc/apk/repositories && \
+    apk update && \
+    apk add --update --no-cache \
     autoconf \
     build-base \
     php7-pear \

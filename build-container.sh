@@ -2,6 +2,18 @@
 # Description: Script for alpine php-fpm container
 # Maintainer: Mauro Cardillo
 #
+source ./.env
+
+#The version of PHP is 
+declare -A PHP_VERSIONS
+PHP_VERSIONS["edge"]="7.4.16-r0"
+PHP_VERSIONS["3.13"]="7.4.15-r0"
+PHP_VERSIONS["3.12"]="7.3.27-r0"
+PHP_VERSIONS["3.11"]="7.3.22-r0"
+PHP_VERSIONS["3.10"]="7.3.14-r0"
+PHP_VERSIONS["3.9"]="7.2.33-r0"
+PHP_VERSIONS["3.8"]="7.2.26-r0"
+PHP_VERSIONS["3.7"]="7.1.33-r0"
 
 # Default values of arguments
 IMAGE=maurosoft1973/alpine-php-fpm:test
@@ -25,6 +37,10 @@ PHP_POOL_MAX_SPARE_SERVERS=3
 for arg in "$@"
 do
     case $arg in
+        -ir=*|--image-release=*)
+        IMAGE_RELEASE="${arg#*=}"
+        shift # Remove
+        ;;
         -d=*|--debug=*)
         DEBUG="${arg#*=}"
         shift # Remove
@@ -49,6 +65,10 @@ do
         PORT="${arg#*=}"
         shift # Remove
         ;;
+        -wd=*|--www_data=*)
+        WWW_DATA="${arg#*=}"
+        shift # Remove
+        ;;
         -wu=*|--www_user=*)
         WWW_USER="${arg#*=}"
         shift # Remove
@@ -68,13 +88,14 @@ do
         -h|--help)
         echo -e "usage "
         echo -e "$0 "
-        echo -e "  -d=|--debug=${DEBUG} -> debug mode"
-        echo -e "  -c=|--container=${CONTAINER} -> name of container"
-        echo -e "  -l=|--lc_all=${LC_ALL} -> locale"
-        echo -e "  -t=|--timezone=${TIMEZONE} -> timezone"
+        echo -e "  -ir=|--image-release -> ${IMAGE}:${IMAGE_RELEASE} (image with release)"
+        echo -e "  -d=|--debug -> ${DEBUG} debug mode"
+        echo -e "  -c=|--container -> ${CONTAINER} name of container"
+        echo -e "  -l=|--lc_all -> ${LC_ALL} locale"
+        echo -e "  -t=|--timezone -> ${TIMEZONE} timezone"
         echo -e "  -i=|--ip -> ${IP} (address ip listen)"
         echo -e "  -p=|--port -> ${PORT} (port listen)"
-        echo -e "  -w=|--www -> ${WWW} (www data)"
+        echo -e "  -wd=|--www_data -> ${WWW_DATA} (www data)"
         echo -e "  -wu=|--www_user -> ${WWW_USER} (www user)"
         echo -e "  -wui=|--www_user_id -> ${WWW_USER_UID} (www user uid)"
         echo -e "  -wg=|--www_group -> ${WWW_GROUP} (www user group)"
@@ -84,7 +105,7 @@ do
     esac
 done
 
-echo "# Image               : ${IMAGE}"
+echo "# Image               : ${IMAGE}:${IMAGE_RELEASE}"
 echo "# Container Name      : ${CONTAINER}"
 echo "# Debug Mode          : ${DEBUG}"
 echo "# Locale              : ${LC_ALL}"
