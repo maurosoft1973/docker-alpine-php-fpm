@@ -23,7 +23,7 @@ PHP_VERSIONS["3.8"]="7.2.26-r0"
 PHP_VERSIONS["3.7"]="7.1.33-r0"
 
 #The date of version PHP
-declare -A PHP_VERSION_DATES
+declare -A PHP_VERSIONS_DATE
 PHP_VERSIONS_DATE["edge"]=""
 PHP_VERSIONS_DATE["3.13"]=""
 PHP_VERSIONS_DATE["3.12"]=""
@@ -62,13 +62,14 @@ do
         echo -e "  -r=|--release=${RELEASE} -> release of image"
         echo -e ""
         echo -e "  Version of PHP installed is ${PHP_VERSIONS["$ALPINE_RELEASE"]}"
-        echo -e "  Version of PHP Date is ${PHP_VERSION_DATES["$ALPINE_RELEASE"]}"
+        echo -e "  Version of PHP Date is ${PHP_VERSIONS_DATE["$ALPINE_RELEASE"]}"
         exit 0
         ;;
     esac
 done
 
 PHP_VERSION=${PHP_VERSIONS["$ALPINE_RELEASE"]}
+PHP_VERSION_DATE=${PHP_VERSIONS_DATE["$ALPINE_RELEASE"]}
 
 echo "# Image               : ${IMAGE}"
 echo "# Image Release       : ${RELEASE}"
