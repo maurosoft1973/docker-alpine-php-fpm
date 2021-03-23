@@ -13,14 +13,14 @@ IMAGE=maurosoft1973/alpine-php-fpm
 
 #The version of PHP
 declare -A PHP_VERSIONS
-PHP_VERSIONS["edge"]="7.4.16-r0"
-PHP_VERSIONS["3.13"]="7.4.15-r0"
-PHP_VERSIONS["3.12"]="7.3.27-r0"
-PHP_VERSIONS["3.11"]="7.3.22-r0"
-PHP_VERSIONS["3.10"]="7.3.14-r0"
-PHP_VERSIONS["3.9"]="7.2.33-r0"
-PHP_VERSIONS["3.8"]="7.2.26-r0"
-PHP_VERSIONS["3.7"]="7.1.33-r0"
+PHP_VERSIONS["edge"]="7.4.16"
+PHP_VERSIONS["3.13"]="7.4.15"
+PHP_VERSIONS["3.12"]="7.3.27"
+PHP_VERSIONS["3.11"]="7.3.22"
+PHP_VERSIONS["3.10"]="7.3.14"
+PHP_VERSIONS["3.9"]="7.2.33"
+PHP_VERSIONS["3.8"]="7.2.26"
+PHP_VERSIONS["3.7"]="7.1.33"
 
 #The date of version PHP
 declare -A PHP_VERSIONS_DATE
