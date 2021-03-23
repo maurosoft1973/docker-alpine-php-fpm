@@ -115,7 +115,7 @@ elif [ "$RELEASE" == "CURRENT" ]; then
     docker rmi -f ${IMAGE}:${PHP_VERSION}-x86_64 > /dev/null 2>&1
 
     echo "Build Image: ${IMAGE}:${PHP_VERSION} -> ${RELEASE}"
-    docker build --build-arg BUILD_DATE=${BUILD_DATE} --build-arg ALPINE_RELEASE=${ALPINE_RELEASE} --build-arg ALPINE_RELEASE_REPOSITORY=${ALPINE_RELEASE_REPOSITORY} --build-arg ALPINE_VERSION=${ALPINE_VERSION} --build-arg ALPINE_VERSION_DATE=${ALPINE_VERSION_DATE} --build-arg PHP_VERSION=${PHP_VERSION} --build-arg PHP_VERSION_DATE=${PHP_VERSION_DATE} -t ${IMAGE}:${PHP_VERSION}-amd64 -t ${IMAGE}:${PHP_VERSION}-x86_64 -f ./Dockerfile .
+    docker build --build-arg BUILD_DATE=${BUILD_DATE} --build-arg ALPINE_RELEASE=${ALPINE_RELEASE} --build-arg ALPINE_RELEASE_REPOSITORY=${ALPINE_RELEASE_REPOSITORY} --build-arg ALPINE_VERSION=${ALPINE_VERSION} --build-arg ALPINE_VERSION_DATE=${ALPINE_VERSION_DATE} --build-arg PHP_VERSION=${PHP_VERSION} --build-arg PHP_VERSION_DATE=${PHP_VERSION_DATE} -t ${IMAGE}:${PHP_VERSION} -t ${IMAGE}:${PHP_VERSION}-amd64 -t ${IMAGE}:${PHP_VERSION}-x86_64 -f ./Dockerfile .
 
     echo "Login Docker HUB"
     echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USER" --password-stdin
