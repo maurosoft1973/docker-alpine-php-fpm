@@ -86,10 +86,6 @@ if [ ${ALPINE_RELEASE} == "edge" ]; then
     ALPINE_RELEASE_REPOSITORY=${ALPINE_RELEASE}
 fi
 
-export 
-
-exit 0
-
 if [ "$RELEASE" == "TEST" ]; then
     echo "Remove image ${IMAGE}:test"
     docker rmi -f ${IMAGE}:test > /dev/null 2>&1
