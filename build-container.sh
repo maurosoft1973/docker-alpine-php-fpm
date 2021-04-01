@@ -2,7 +2,14 @@
 # Description: Script for alpine php-fpm container
 # Maintainer: Mauro Cardillo
 #
+echo "Get Remote Environment Variable"
+wget -q "https://gitlab.com/maurosoft1973-docker/alpine-variable/-/raw/master/.env" -O ./.env
 source ./.env
+
+echo "Get Remote Settings"
+wget -q "https://gitlab.com/maurosoft1973-docker/alpine-variable/-/raw/master/settings.sh" -O ./settings.sh
+chmod +x ./settings.sh
+source ./settings.sh
 
 # Default values of arguments
 IMAGE=maurosoft1973/alpine-php-fpm
@@ -103,8 +110,8 @@ echo "# WWW Group               : $WWW_GROUP"
 echo "# WWW Group UID           : $WWW_GROUP_UID"
 
 echo -e "Check if container ${CONTAINER} exist"
-CHECK=$(docker container ps -a -f "name=${CONTAINER}" | wc -l)
-if [ ${CHECK} == 2 ]; then
+CHECK=$(docker container ps -a | grep ${CONTAINER} | wc -l)
+if [ ${CHECK} == 1 ]; then
     echo -e "Stop Container -> ${CONTAINER}"
     docker stop ${CONTAINER} > /dev/null
 
@@ -142,3 +149,6 @@ docker exec -it ${CONTAINER} php -i
 echo -e ""
 echo -e "Container Logs"
 docker logs ${CONTAINER}
+
+rm -rf ./.env
+rm -rf ./settings.sh

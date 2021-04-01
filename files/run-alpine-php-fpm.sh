@@ -50,10 +50,6 @@ fi
 echo "Change Timezone ${TIMEZONE} php.ini file"
 echo "date.timezone = '${TIMEZONE}'" >> /etc/php7/conf.d/100-custom.ini
 
-#TIMEZONE_PHP=${TIMEZONE//\//\\/}
-#sed "s/{timezone}/${TIMEZONE_PHP}/g" /etc/php7/php.ini > /tmp/php.ini
-#cp /tmp/php.ini /etc/php7/php.ini
-
 if [ "$PHP_XDEBUG_ENABLED" == "1" ]; then
     echo "zend_extension=/usr/lib/php7/modules/xdebug.so" >> /etc/php7/conf.d/99-xdebug.ini
     echo "xdebug.client_port = ${PHP_XDEBUG_CLIENT_PORT}" >> /etc/php7/conf.d/99-xdebug.ini

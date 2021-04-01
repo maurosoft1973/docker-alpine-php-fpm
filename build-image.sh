@@ -6,32 +6,17 @@
 # Description: Build image and push to repository
 # Maintainer: Mauro Cardillo
 # DOCKER_HUB_USER and DOCKER_HUB_PASSWORD is user environment variable
+echo "Get Remote Environment Variable"
+wget -q "https://gitlab.com/maurosoft1973-docker/alpine-variable/-/raw/master/.env" -O ./.env
 source ./.env
+
+echo "Get Remote Settings"
+wget -q "https://gitlab.com/maurosoft1973-docker/alpine-variable/-/raw/master/settings.sh" -O ./settings.sh
+chmod +x ./settings.sh
+source ./settings.sh
 
 BUILD_DATE=$(date +"%Y-%m-%d")
 IMAGE=maurosoft1973/alpine-php-fpm
-
-#The version of PHP
-declare -A PHP_VERSIONS
-PHP_VERSIONS["edge"]="7.4.16"
-PHP_VERSIONS["3.13"]="7.4.15"
-PHP_VERSIONS["3.12"]="7.3.27"
-PHP_VERSIONS["3.11"]="7.3.22"
-PHP_VERSIONS["3.10"]="7.3.14"
-PHP_VERSIONS["3.9"]="7.2.33"
-PHP_VERSIONS["3.8"]="7.2.26"
-PHP_VERSIONS["3.7"]="7.1.33"
-
-#The date of version PHP
-declare -A PHP_VERSIONS_DATE
-PHP_VERSIONS_DATE["edge"]=""
-PHP_VERSIONS_DATE["3.13"]=""
-PHP_VERSIONS_DATE["3.12"]=""
-PHP_VERSIONS_DATE["3.11"]=""
-PHP_VERSIONS_DATE["3.10"]=""
-PHP_VERSIONS_DATE["3.9"]=""
-PHP_VERSIONS_DATE["3.8"]=""
-PHP_VERSIONS_DATE["3.7"]=""
 
 # Loop through arguments and process them
 for arg in "$@"
@@ -56,13 +41,12 @@ do
         -h|--help)
         echo -e "usage "
         echo -e "$0 "
-        echo -e "  -ar=|--alpine-release=${ALPINE_RELEASE} -> alpine release"
-        echo -e "  -av=|--alpine-version=${ALPINE_VERSION} -> alpine version"
-        echo -e "  -avd=|--alpine-version-date=${ALPINE_VERSION_DATE} -> alpine version date"
-        echo -e "  -r=|--release=${RELEASE} -> release of image"
+        echo -e "  -ar=|--alpine-release -> ${ALPINE_RELEASE} (alpine release)"
+        echo -e "  -av=|--alpine-version -> ${ALPINE_VERSION} (alpine version)"
+        echo -e "  -avd=|--alpine-version-date -> ${ALPINE_VERSION_DATE} (alpine version date)"
+        echo -e "  -r=|--release -> ${RELEASE} (release of image.Values: TEST, CURRENT, LATEST)"
         echo -e ""
-        echo -e "  Version of PHP installed is ${PHP_VERSIONS["$ALPINE_RELEASE"]}"
-        echo -e "  Version of PHP Date is ${PHP_VERSIONS_DATE["$ALPINE_RELEASE"]}"
+        echo -e "  Version of PHP installed is ${PHP_VERSIONS["$ALPINE_RELEASE"]} (Released ${PHP_VERSIONS_DATE["$ALPINE_RELEASE"]})"
         exit 0
         ;;
     esac
@@ -153,3 +137,6 @@ else
     echo "Push Image -> ${IMAGE}:latest"
     docker push ${IMAGE}:latest
 fi
+
+rm -rf ./.env
+rm -rf ./settings.sh

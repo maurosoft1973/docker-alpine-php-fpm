@@ -7,7 +7,6 @@
 [![Alpine Version](https://img.shields.io/badge/Alpine%20version-v%ALPINE_VERSION%-green.svg?style=for-the-badge)](https://alpinelinux.org/)
 [![PHP FPM Version](https://img.shields.io/docker/v/maurosoft1973/alpine-php-fpm?sort=semver&style=for-the-badge)](https://www.php.net)
 
-
 This Docker image [(maurosoft1973/alpine-php-fpm)](https://hub.docker.com/r/maurosoft1973/alpine-php-fpm/) is based on the minimal [Alpine Linux](https://alpinelinux.org/) with [PHP Version v%PHP_VERSION%](https://www.php.net).
 
 ##### Alpine Version %ALPINE_VERSION% (Released %ALPINE_VERSION_DATE%)
@@ -98,18 +97,19 @@ These features include:
 ### Main Php FPM parameters:
 * `LC_ALL`: default locale (en_GB.UTF-8)
 * `TIMEZONE`: default timezone (Europe/Brussels)
+* `IP`: address ip listen (default 0.0.0.0)
 * `PORT`: listen port (default 7000)
 * `WWW_DATA`: specify the path of the website
-* `WWW_USER`: specify the owner for the database
-* `WWW_USER_ID`: specify the user identifier (uid) associate at WWW_USER
-* `WWW_GROUP`: specify the group
-* `WWW_GROUP_ID`: specify the user Group identifier (gid) associate as WWW_GROUP
-* `PHP_POOL_PM_MODE`: Choose how the process manager will control the number of child processes. Possible values: static, ondemand, dynamic
-* `PHP_POOL_MAX_CHILDREN`: The number of child processes to be created when pm is set to static and the maximum number of child processes to be created when pm is set to dynamic.
-* `PHP_POOL_START_SERVERS`: The number of child processes created on startup. Used only when pm is set to dynamic
-* `PHP_POOL_MIN_SPARE_SERVERS`: The desired minimum number of idle server processes. Used only when pm is set to dynamic
-* `PHP_POOL_MAX_SPARE_SERVERS`: The desired maximum number of idle server processes. Used only when pm is set to dynamic
-* `PHP_POOL_REQUEST_TERMINATE_TIMEOUT`: The timeout for serving a single request after which the worker process will be killed. This option should be used when the 'max_execution_time' ini option does not stop script execution for some reason. A value of '0' means 'Off'. Available units: s(econds)(default), m(inutes), h(ours), or d(ays). Default value: 0.
+* `WWW_USER`: specify the user ownership (default www)
+* `WWW_USER_ID`: specify the user identifier (uid) associate at WWW_USER (default 5001)
+* `WWW_GROUP`: specify the group ownership (default www-data)
+* `WWW_GROUP_ID`: specify the user group identifier (gid) associate as WWW_GROUP (default 33)
+* `PHP_POOL_PM_MODE`: Choose how the process manager will control the number of child processes. Possible values: static, ondemand, dynamic (default dynamic)
+* `PHP_POOL_MAX_CHILDREN`: The number of child processes to be created when pm is set to static and the maximum number of child processes to be created when pm is set to dynamic. (default 5)
+* `PHP_POOL_START_SERVERS`: The number of child processes created on startup. Used only when pm is set to dynamic (default 2)
+* `PHP_POOL_MIN_SPARE_SERVERS`: The desired minimum number of idle server processes. Used only when pm is set to dynamic (default 1)
+* `PHP_POOL_MAX_SPARE_SERVERS`: The desired maximum number of idle server processes. Used only when pm is set to dynamic (default 3)
+* `PHP_POOL_REQUEST_TERMINATE_TIMEOUT`: The timeout for serving a single request after which the worker process will be killed. This option should be used when the 'max_execution_time' ini option does not stop script execution for some reason. A value of '0' means 'Off'. Available units: s(econds)(default), m(inutes), h(ours), or d(ays). (default 300).
 * `PHP_XDEBUG_ENABLED`: Enabled (1) or disabled (0) xdebug extension (default 1)
 * `PHP_XDEBUG_CLIENT_PORT`: (default 9000)
 * `PHP_XDEBUG_DISCOVER_CLIENT_HOST`: (default 1)
