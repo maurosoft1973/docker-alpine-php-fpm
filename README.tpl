@@ -118,4 +118,4 @@ These features include:
 * `PHP_XDEBUG_MODE`: (default debug,develop)
 
 ***
-###### Latest Update %LATEST_UPDATE%
+###### Last Update %LAST_UPDATE%

@@ -44,16 +44,14 @@ update readme:
         - ssh-keyscan -H gitlab.com >> ~/.ssh/known_hosts
         - echo -e "Setting permission for ~/.ssh/known_hosts (chmod 644)"
         - chmod 644 ~/.ssh/known_hosts
-        - echo -e "Test GILAB Access"
-        - ssh -T git@gitlab.com
         - git clone git@gitlab.com:maurosoft1973-docker/$DOCKERHUB_REPO_NAME.git /tmp/$DOCKERHUB_REPO_NAME
         - cd /tmp/$DOCKERHUB_REPO_NAME
         - LAST_UPDATE=$(date +"%d.%m.%Y %H:%M:%S")
-        - echo "Generate README for Version ${LFTP_VERSION}"
+        - echo "Generate README"
         - sed "s/\%ALPINE_VERSION\%/${ALPINE_VERSION}/g" README.tpl > README_COMPILE.md1
         - sed "s/\%ALPINE_VERSION_DATE\%/${ALPINE_VERSION_DATE}/g" README_COMPILE.md1 > README_COMPILE.md2
-        - sed "s/\%NGINX_VERSION\%/${NGINX_VERSION}/g" README_COMPILE.md2 > README_COMPILE.md3
-        - sed "s/\%NGINX_VERSION_DATE\%/${NGINX_VERSION_DATE}/g" README_COMPILE.md3 > README_COMPILE.md4
+        - sed "s/\%PHP_VERSION\%/${PHP_VERSION}/g" README_COMPILE.md2 > README_COMPILE.md3
+        - sed "s/\%PHP_VERSION_DATE\%/${PHP_VERSION_DATE}/g" README_COMPILE.md3 > README_COMPILE.md4
         - sed "s/\%LAST_UPDATE\%/${LAST_UPDATE}/g" README_COMPILE.md4 > README.md
         - rm -rf README_COMPILE.*
         - git add .
