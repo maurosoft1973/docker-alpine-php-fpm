@@ -1,8 +1,10 @@
-FROM maurosoft1973/alpine
+ARG DOCKER_ALPINE_VERSION
+
+FROM maurosoft1973/alpine:$DOCKER_ALPINE_VERSION
 
 ARG BUILD_DATE
+ARG ALPINE_ARCHITECTURE
 ARG ALPINE_RELEASE
-ARG ALPINE_RELEASE_REPOSITORY
 ARG ALPINE_VERSION
 ARG ALPINE_VERSION_DATE
 ARG PHP_VERSION
@@ -10,17 +12,17 @@ ARG PHP_VERSION_DATE
 
 LABEL \
     maintainer="Mauro Cardillo <mauro.cardillo@gmail.com>" \
-    architecture="amd64/x86_64" \
+    architecture="$ALPINE_ARCHITECTURE" \
     php-version="$PHP_VERSION" \
     alpine-version="$ALPINE_VERSION" \
     build="$BUILD_DATE" \
     org.opencontainers.image.title="alpine-php-fpm" \
-    org.opencontainers.image.description="PHP-FPM 7.4.16 Docker image running on Alpine Linux" \
+    org.opencontainers.image.description="PHP-FPM Docker image running on Alpine Linux" \
     org.opencontainers.image.authors="Mauro Cardillo <mauro.cardillo@gmail.com>" \
     org.opencontainers.image.vendor="Mauro Cardillo" \
     org.opencontainers.image.version="v$PHP_VERSION" \
-    org.opencontainers.image.url="https://hub.docker.com/r/maurosoft1973/alpine-php-fpm/" \
-    org.opencontainers.image.source="https://gitlab.com/maurosoft1973-docker/alpine-php-fpm" \
+    org.opencontainers.image.url="https://hub.docker.com/r/maurosoft1973/alpine-lftp/" \
+    org.opencontainers.image.source="https://gitlab.com/maurosoft1973-docker/alpine-lftp" \
     org.opencontainers.image.created=$BUILD_DATE
 
 RUN \
