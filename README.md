@@ -4,13 +4,13 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/maurosoft1973/alpine-php-fpm.svg?style=for-the-badge&logo=docker)](https://hub.docker.com/r/maurosoft1973/alpine-php-fpm/)
 [![Docker Stars](https://img.shields.io/docker/stars/maurosoft1973/alpine-php-fpm.svg?style=for-the-badge&logo=docker)](https://hub.docker.com/r/maurosoft1973/alpine-php-fpm/)
 
-[![Alpine Version](https://img.shields.io/badge/Alpine%20version-v3.13.5-green.svg?style=for-the-badge)](https://alpinelinux.org/)
+[![Alpine Version](https://img.shields.io/badge/Alpine%20version-v3.14.0-green.svg?style=for-the-badge)](https://alpinelinux.org/)
 [![PHP FPM Version](https://img.shields.io/docker/v/maurosoft1973/alpine-php-fpm?sort=semver&style=for-the-badge)](https://www.php.net)
 
-This Docker image [(maurosoft1973/alpine-php-fpm)](https://hub.docker.com/r/maurosoft1973/alpine-php-fpm/) is based on the minimal [Alpine Linux](https://alpinelinux.org/) with [PHP Version v7.4.15](https://www.php.net).
+This Docker image [(maurosoft1973/alpine-php-fpm)](https://hub.docker.com/r/maurosoft1973/alpine-php-fpm/) is based on the minimal [Alpine Linux](https://alpinelinux.org/) with [PHP Version v7.4.21](https://www.php.net).
 
-##### Alpine Version 3.13.5 (Released Apr 14, 2021)
-##### PHP FPM Version 7.4.15 (Released Feb 04, 2021)
+##### Alpine Version 3.14.0 (Released Jun 14, 2021)
+##### PHP FPM Version 7.4.21 (Released Jul 01, 2021)
 
 ----
 
@@ -118,4 +118,4 @@ These features include:
 * `PHP_XDEBUG_MODE`: (default debug,develop)
 
 ***
-###### Last Update 19.04.2021 13:45:38
+###### Last Update 06.07.2021 13:23:24
