@@ -25,17 +25,16 @@ LABEL \
     org.opencontainers.image.source="https://gitlab.com/maurosoft1973-docker/alpine-php-fpm" \
     org.opencontainers.image.created=$BUILD_DATE
 
-RUN delgroup www-data | :
-
 RUN \
-    deluser xfs && \
+    deluser xfs 2> /dev/null && \
+    delgroup www-data 2> /dev/null && \
     addgroup -g 33 www-data && \
     adduser -s /bin/false -h /var/www -u 33 -G www-data -D www-data && \
     mkdir -p /var/run/php && \
     mkdir -p /var/www && \
     echo "" > /etc/apk/repositories && \
-    echo "https://dl-cdn.alpinelinux.org/alpine/$ALPINE_RELEASE_REPOSITORY/main" >> /etc/apk/repositories && \
-    echo "https://dl-cdn.alpinelinux.org/alpine/$ALPINE_RELEASE_REPOSITORY/community" >> /etc/apk/repositories && \
+    echo "https://dl-cdn.alpinelinux.org/alpine/v$ALPINE_RELEASE/main" >> /etc/apk/repositories && \
+    echo "https://dl-cdn.alpinelinux.org/alpine/v$ALPINE_RELEASE/community" >> /etc/apk/repositories && \
     apk update && \
     apk add --update --no-cache \
     autoconf \
