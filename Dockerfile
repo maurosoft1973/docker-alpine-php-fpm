@@ -17,17 +17,18 @@ LABEL \
     alpine-version="$ALPINE_VERSION" \
     build="$BUILD_DATE" \
     org.opencontainers.image.title="alpine-php-fpm" \
-    org.opencontainers.image.description="PHP-FPM Docker image running on Alpine Linux" \
+    org.opencontainers.image.description="PHP-FPM $PHP_VERSION Docker image running on Alpine Linux" \
     org.opencontainers.image.authors="Mauro Cardillo <mauro.cardillo@gmail.com>" \
     org.opencontainers.image.vendor="Mauro Cardillo" \
     org.opencontainers.image.version="v$PHP_VERSION" \
-    org.opencontainers.image.url="https://hub.docker.com/r/maurosoft1973/alpine-lftp/" \
-    org.opencontainers.image.source="https://gitlab.com/maurosoft1973-docker/alpine-lftp" \
+    org.opencontainers.image.url="https://hub.docker.com/r/maurosoft1973/alpine-php-fpm/" \
+    org.opencontainers.image.source="https://gitlab.com/maurosoft1973-docker/alpine-php-fpm" \
     org.opencontainers.image.created=$BUILD_DATE
 
+RUN delgroup www-data | :
+
 RUN \
-    deluser xfs 2> /dev/null && \
-    delgroup www-data 2> /dev/null && \
+    deluser xfs && \
     addgroup -g 33 www-data && \
     adduser -s /bin/false -h /var/www -u 33 -G www-data -D www-data && \
     mkdir -p /var/run/php && \
