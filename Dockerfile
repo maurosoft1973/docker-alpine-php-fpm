@@ -26,8 +26,10 @@ LABEL \
     org.opencontainers.image.created=$BUILD_DATE
 
 RUN \
-    deluser xfs && \
-    adduser -s /bin/false -H -u 33 -D www-data && \
+    deluser xfs 2> /dev/null && \
+    delgroup www-data 2> /dev/null && \
+    addgroup -g 33 www-data && \
+    adduser -s /bin/false -h /var/www -u 33 -G www-data -D www-data && \
     mkdir -p /var/run/php && \
     mkdir -p /var/www && \
     echo "" > /etc/apk/repositories && \
