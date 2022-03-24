@@ -112,17 +112,25 @@ fi
 PLATFORM="linux/amd64"
 if [ "${ALPINE_ARCHITECTURE}" == "aarch64" ]; then
     PLATFORM="linux/arm64"
+    PHP_PACKAGES="php7-pear php7-dev php7-common php7-cli php7-ctype php7-mysqlnd php7-mysqli php7-json php7-curl php7-opcache php7-xml php7-zlib php7-phar php7-tokenizer php7-zip php7-apcu php7-gd php7-iconv php7-mbstring php7-mcrypt php7-fileinfo php7-posix php7-imap php7-ssh2 php7-session php7-openssl php7-pdo php7-pdo_mysql php7-fpm php7-dom php7-simplexml php7-xmlwriter php7-intl "
 elif [ "${ALPINE_ARCHITECTURE}" == "armhf" ]; then
     PLATFORM="linux/arm/v6"
+    PHP_PACKAGES="php7-pear php7-dev php7-common php7-cli php7-ctype php7-mysqlnd php7-mysqli php7-json php7-curl php7-opcache php7-xml php7-zlib php7-phar php7-tokenizer php7-zip php7-apcu php7-gd php7-iconv php7-mbstring php7-mcrypt php7-fileinfo php7-posix php7-imap php7-ssh2 php7-session php7-openssl php7-pdo php7-pdo_mysql php7-fpm php7-dom php7-simplexml php7-xmlwriter php7-intl "
 elif [ "${ALPINE_ARCHITECTURE}" == "armv7" ]; then
     PLATFORM="linux/arm/v7"
+    PHP_PACKAGES="php7-pear php7-dev php7-common php7-cli php7-ctype php7-mysqlnd php7-mysqli php7-json php7-curl php7-opcache php7-xml php7-zlib php7-phar php7-tokenizer php7-zip php7-apcu php7-gd php7-iconv php7-mbstring php7-mcrypt php7-fileinfo php7-posix php7-imap php7-ssh2 php7-session php7-openssl php7-pdo php7-pdo_mysql php7-fpm php7-dom php7-simplexml php7-xmlwriter php7-intl "
 elif [ "${ALPINE_ARCHITECTURE}" == "ppc64le" ]; then
     PLATFORM="linux/ppc64le"
+    PHP_PACKAGES="php7-pear php7-dev php7-common php7-cli php7-ctype php7-mysqlnd php7-mysqli php7-json php7-curl php7-opcache php7-xml php7-zlib php7-phar php7-tokenizer php7-zip php7-apcu php7-gd php7-iconv php7-mbstring php7-mcrypt php7-fileinfo php7-posix php7-imap php7-ssh2 php7-session php7-openssl php7-pdo php7-pdo_mysql php7-fpm php7-dom php7-simplexml php7-xmlwriter php7-intl "
 elif [ "${ALPINE_ARCHITECTURE}" == "x86" ]; then
     PLATFORM="linux/386"
+    PHP_PACKAGES="php7-pear php7-dev php7-common php7-cli php7-ctype php7-mysqlnd php7-mysqli php7-json php7-curl php7-opcache php7-xml php7-zlib php7-phar php7-tokenizer php7-zip php7-apcu php7-gd php7-iconv php7-mbstring php7-mcrypt php7-fileinfo php7-posix php7-imap php7-ssh2 php7-session php7-openssl php7-pdo php7-pdo_mysql php7-fpm php7-dom php7-simplexml php7-xmlwriter php7-intl "
 elif [ "${ALPINE_ARCHITECTURE}" == "x86_64" ]; then
     PLATFORM="linux/amd64"
+    PHP_PACKAGES="php7-pear php7-dev php7-common php7-cli php7-ctype php7-mysqlnd php7-mysqli php7-json php7-curl php7-opcache php7-xml php7-zlib php7-phar php7-tokenizer php7-zip php7-apcu php7-gd php7-iconv php7-imagick php7-mbstring php7-mcrypt php7-fileinfo php7-posix php7-imap php7-ssh2 php7-session php7-openssl php7-pdo php7-pdo_mysql php7-fpm php7-dom php7-simplexml php7-xmlwriter php7-intl "
 fi
+
+echo $PHP_PACKAGES
 
 if [ "$RELEASE" == "TEST" ]; then
     echo "Remove image ${DOCKER_IMAGE}:test-${ALPINE_ARCHITECTURE}"
@@ -138,6 +146,7 @@ if [ "$RELEASE" == "TEST" ]; then
             --build-arg ALPINE_VERSION_DATE="${ALPINE_VERSION_DATE}" \
             --build-arg PHP_VERSION=${PHP_VERSION} \
             --build-arg PHP_VERSION_DATE="${PHP_VERSION_DATE}" \
+            --build-arg PHP_PACKAGES="${PHP_PACKAGES}" \
             -t ${DOCKER_IMAGE}:test-${ALPINE_ARCHITECTURE} \
             -f ./Dockerfile .
 elif [ "$RELEASE" == "CURRENT" ]; then
@@ -157,6 +166,7 @@ elif [ "$RELEASE" == "CURRENT" ]; then
             --build-arg ALPINE_VERSION_DATE="${ALPINE_VERSION_DATE}" \
             --build-arg PHP_VERSION=${PHP_VERSION} \
             --build-arg PHP_VERSION_DATE="${PHP_VERSION_DATE}" \
+            --build-arg PHP_PACKAGES="${PHP_PACKAGES}" \
             -t ${DOCKER_IMAGE}:${ALPINE_VERSION}-${ALPINE_ARCHITECTURE} \
             -t ${DOCKER_IMAGE}:${ALPINE_VERSION}-${PHP_VERSION}-${ALPINE_ARCHITECTURE} \
             -f ./Dockerfile .
@@ -177,6 +187,7 @@ else
             --build-arg ALPINE_VERSION_DATE="${ALPINE_VERSION_DATE}" \
             --build-arg PHP_VERSION=${PHP_VERSION} \
             --build-arg PHP_VERSION_DATE="${PHP_VERSION_DATE}" \
+            --build-arg PHP_PACKAGES="${PHP_PACKAGES}" \
             -t ${DOCKER_IMAGE}:${ALPINE_ARCHITECTURE} \
             -t ${DOCKER_IMAGE}:${PHP_VERSION}-${ALPINE_ARCHITECTURE} \
             -f ./Dockerfile .
