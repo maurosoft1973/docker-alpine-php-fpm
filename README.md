@@ -4,12 +4,12 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/maurosoft1973/alpine-php-fpm.svg?style=for-the-badge&logo=docker)](https://hub.docker.com/r/maurosoft1973/alpine-php-fpm/)
 [![Docker Stars](https://img.shields.io/docker/stars/maurosoft1973/alpine-php-fpm.svg?style=for-the-badge&logo=docker)](https://hub.docker.com/r/maurosoft1973/alpine-php-fpm/)
 
-[![Alpine Version](https://img.shields.io/badge/Alpine%20version-v3.14.1-green.svg?style=for-the-badge)](https://alpinelinux.org/)
+[![Alpine Version](https://img.shields.io/badge/Alpine%20version-v3.14.0-green.svg?style=for-the-badge)](https://alpinelinux.org/)
 [![PHP FPM Version](https://img.shields.io/docker/v/maurosoft1973/alpine-php-fpm?sort=semver&style=for-the-badge)](https://www.php.net)
 
 This Docker image [(maurosoft1973/alpine-php-fpm)](https://hub.docker.com/r/maurosoft1973/alpine-php-fpm/) is based on the minimal [Alpine Linux](https://alpinelinux.org/) with [PHP Version v7.4.26-r0](https://www.php.net).
 
-##### Alpine Version 3.14.1 (Released Aug 04 2021)
+##### Alpine Version 3.14.0 (Released Jun 15 2021)
 ##### PHP FPM Version 7.4.26-r0 (Released 2021-11-18 21:39:13)
 
 ----
@@ -102,20 +102,20 @@ These features include:
 * ```:test-ppc64le```   test 64 bit PowerPC
 * ```:test-x86```       test 32 bit Intel/AMD
 * ```:test-x86_64```    test 64 bit Intel/AMD
-* ```:3.14.1``` 3.14.1 branch based (Automatic Architecture Selection)
-* ```:3.14.1-aarch64```   3.14.1 64 bit ARM
-* ```:3.14.1-armhf```     3.14.1 32 bit ARM v6
-* ```:3.14.1-armv7```     3.14.1 32 bit ARM v7
-* ```:3.14.1-ppc64le```   3.14.1 64 bit PowerPC
-* ```:3.14.1-x86```       3.14.1 32 bit Intel/AMD
-* ```:3.14.1-x86_64```    3.14.1 64 bit Intel/AMD
-* ```:3.14.1-7.4.26-r0``` 3.14.1-7.4.26-r0 branch based (Automatic Architecture Selection)
-* ```:3.14.1-7.4.26-r0-aarch64```   3.14.1 64 bit ARM
-* ```:3.14.1-7.4.26-r0-armhf```     3.14.1 32 bit ARM v6
-* ```:3.14.1-7.4.26-r0-armv7```     3.14.1 32 bit ARM v7
-* ```:3.14.1-7.4.26-r0-ppc64le```   3.14.1 64 bit PowerPC
-* ```:3.14.1-7.4.26-r0-x86```       3.14.1 32 bit Intel/AMD
-* ```:3.14.1-7.4.26-r0-x86_64```    3.14.1 64 bit Intel/AMD
+* ```:3.14.0``` 3.14.0 branch based (Automatic Architecture Selection)
+* ```:3.14.0-aarch64```   3.14.0 64 bit ARM
+* ```:3.14.0-armhf```     3.14.0 32 bit ARM v6
+* ```:3.14.0-armv7```     3.14.0 32 bit ARM v7
+* ```:3.14.0-ppc64le```   3.14.0 64 bit PowerPC
+* ```:3.14.0-x86```       3.14.0 32 bit Intel/AMD
+* ```:3.14.0-x86_64```    3.14.0 64 bit Intel/AMD
+* ```:3.14.0-7.4.26-r0``` 3.14.0-7.4.26-r0 branch based (Automatic Architecture Selection)
+* ```:3.14.0-7.4.26-r0-aarch64```   3.14.0 64 bit ARM
+* ```:3.14.0-7.4.26-r0-armhf```     3.14.0 32 bit ARM v6
+* ```:3.14.0-7.4.26-r0-armv7```     3.14.0 32 bit ARM v7
+* ```:3.14.0-7.4.26-r0-ppc64le```   3.14.0 64 bit PowerPC
+* ```:3.14.0-7.4.26-r0-x86```       3.14.0 32 bit Intel/AMD
+* ```:3.14.0-7.4.26-r0-x86_64```    3.14.0 64 bit Intel/AMD
 
 ## Layers & Sizes
 
@@ -153,4 +153,4 @@ These features include:
 * `PHP_XDEBUG_MODE`: (default debug,develop)
 
 ***
-###### Last Update 16.04.2022 13:58:30
+###### Last Update 16.04.2022 14:38:14
